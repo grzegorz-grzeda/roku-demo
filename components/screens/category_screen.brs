@@ -10,5 +10,7 @@ sub onCategorySelected(obj)
 end sub
 
 sub loadFeed(url)
-  ? "loadFeed! ";url
+    appInfo = CreateObject("roAppInfo")
+    content_server = appInfo.getValue("content_server")
+    ? "loadFeed! ";content_server;url
 end sub
