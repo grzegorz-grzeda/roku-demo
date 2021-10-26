@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component name="category_screen" extends="Group">
     <script type="text/brightscript" uri="pkg:/components/screens/category_screen.brs" />
+    <interface>
+        <field id="category_selected" type="assocarray" alias="category_list.itemSelected" />
+    </interface>
     <children>
         <Background id="Background" />
         <Label translation="[75, 150]" id="env" font="font:LargeBoldSystemFont" text="PICK A CATEGORY:" />

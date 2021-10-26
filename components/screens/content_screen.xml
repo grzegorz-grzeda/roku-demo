@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="content_screen" extends="Group" initialFocus="content_grid">
+    <script type="text/brightscript" uri="pkg:/components/screens/content_screen.brs" />
+    <interface>
+        <field id="feed_data" type="assocArray" onChange="onFeedChange" />
+    </interface>
+    <children>
+        <Background id="Background" />
+        <Label id="header" color="0xFFFFFF" font="font:LargeBoldSystemFont" text="" translation="[75, 75]" />
+        <PosterGrid id="content_grid" translation="[100, 175]" basePosterSize="[500, 280]" itemSpacing="[110, 110]" caption1NumLines="1" caption2NumLines="1" numColumns="3" numRows="4" />
+    </children>
+</component>
