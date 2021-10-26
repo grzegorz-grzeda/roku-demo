@@ -6,6 +6,14 @@ function init()
 end function
 
 function onKeyEvent(key, press) as boolean
+    if key = "back" and press
+        if m.content_screen.visible
+            m.content_screen.visible = false
+            m.category_screen.visible = true
+            m.category_screen.setFocus(true)
+            return true
+        end if
+    end if
     return false
 end function
 
