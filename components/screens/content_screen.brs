@@ -1,7 +1,7 @@
 sub init()
     m.header = m.top.findNode("header")
     m.content_grid = m.top.findNode("content_grid")
-    m.top.observeField("visible","onVisibleChanged")
+    m.top.observeField("visible", "onVisibleChanged")
 end sub
 
 sub onVisibleChanged()
@@ -12,14 +12,16 @@ sub onFeedChange(obj)
     feed = obj.getData()
     m.header.text = feed.title
     posterContent = createObject("roSGNode", "ContentNode")
+    appInfo = CreateObject("roAppInfo")
+    content_server = appInfo.getValue("content_server")
     for each item in feed.items
         ? item
-        node = CreateObject("roSGNode","ContentNode")
+        node = CreateObject("roSGNode", "ContentNode")
         node.streamformat = item.streamformat
         node.title = item.title
         node.url = item.url
         node.description = item.description
-        node.HDGRIDPOSTERURL = item.thumbnail
+        node.HDGRIDPOSTERURL = content_server + item.thumbnail
         node.SHORTDESCRIPTIONLINE1 = item.title
         node.SHORTDESCRIPTIONLINE2 = item.description
         postercontent.appendChild(node)
