@@ -7,7 +7,7 @@ sub init()
 end sub
 
 sub onVisibleChange()
-    if m.top.visible = true then m.play_button.setFocus(true)
+    if m.top.visible then m.play_button.setFocus(true)
 end sub
 
 sub onContentChange(obj)

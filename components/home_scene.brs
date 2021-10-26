@@ -3,6 +3,7 @@ function init()
     m.content_screen = m.top.findNode("content_screen")
     m.details_screen = m.top.findNode("details_screen")
     m.video_player = m.top.findNode("video_player")
+    initVideoPlayer()
     m.content_screen.observeField("content_selected", "onContentSelected")
     m.category_screen.observeField("category_selected", "onCategorySelected")
     m.details_screen.observeField("play_button_pressed", "onPlayButtonPressed")
@@ -22,19 +23,24 @@ function onKeyEvent(key, press) as boolean
             m.content_screen.setFocus(true)
             return true
         else if m.video_player.visible
-            m.video_player.visible = false
-            m.details_screen.visible = true
-            m.details_screen.setFocus(true)
+            closeVideo()
             return true
         end if
     end if
     return false
 end function
 
+sub initVideoPlayer()
+    m.video_player.EnableCookies()
+    m.video_player.setCertificatesFile("common:/certs/ca-bundle.crt")
+    m.video_player.InitClientCertificates()
+    m.video_player.observeFieldScoped("state", "onPlayerStateChanged")
+end sub
+
 sub onContentSelected(obj)
     selected_index = obj.getData()
-    item = m.content_screen.findNode("content_grid").content.getChild(selected_index)
-    m.details_screen.content = item
+    m.selected_media = m.content_screen.findNode("content_grid").content.getChild(selected_index)
+    m.details_screen.content = m.selected_media
     m.content_screen.visible = false
     m.details_screen.visible = true
 end sub
@@ -43,6 +49,24 @@ sub onPlayButtonPressed(obj)
     m.details_screen.visible = false
     m.video_player.visible = true
     m.video_player.setFocus(true)
+    m.video_player.content = m.selected_media
+    m.video_player.control = "play"
+end sub
+
+sub onPlayerStateChanged(obj)
+    state = obj.getData()
+    if state = "error"
+        ? "Video error: ";m.video_player.errorCode;" ";m.video_player.errorMsg
+    else if state = "finished"
+        closeVideo()
+    end if
+end sub
+
+sub closeVideo()
+    m.video_player.control = "stop"
+    m.video_player.visible = false
+    m.details_screen.visible = true
+    m.details_screen.setFocus(true)
 end sub
 
 sub onCategorySelected(obj)
