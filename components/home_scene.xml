@@ -6,5 +6,6 @@
         <content_screen id="content_screen" visible="false" />
         <details_screen id="details_screen" visible="false" />
         <video id="video_player" visible="false" width="1920" height="1080" />
+        <dialog id="error_dialog" visible="false" title="Error" />
     </children>
 </component>

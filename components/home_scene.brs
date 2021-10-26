@@ -3,6 +3,7 @@ function init()
     m.content_screen = m.top.findNode("content_screen")
     m.details_screen = m.top.findNode("details_screen")
     m.video_player = m.top.findNode("video_player")
+    m.error_dialog = m.top.findNode("error_dialog")
     initVideoPlayer()
     m.content_screen.observeField("content_selected", "onContentSelected")
     m.category_screen.observeField("category_selected", "onCategorySelected")
@@ -56,10 +57,16 @@ end sub
 sub onPlayerStateChanged(obj)
     state = obj.getData()
     if state = "error"
-        ? "Video error: ";m.video_player.errorCode;" ";m.video_player.errorMsg
+        showErrorDialog(m.video_player.errorMsg, m.video_player.errorCode)
     else if state = "finished"
         closeVideo()
     end if
+end sub
+
+sub showErrorDialog(msg, code)
+    m.error_dialog.message = msg + chr(10) + "Error Code: " + code.toStr()
+    m.error_dialog.visible = true
+    m.top.dialog = m.error_dialog
 end sub
 
 sub closeVideo()

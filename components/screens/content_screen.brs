@@ -15,7 +15,6 @@ sub onFeedChange(obj)
     appInfo = CreateObject("roAppInfo")
     content_server = appInfo.getValue("content_server")
     for each item in feed.items
-        ? item
         node = CreateObject("roSGNode", "ContentNode")
         node.streamformat = item.streamformat
         node.title = item.title
