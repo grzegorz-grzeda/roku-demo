@@ -2,7 +2,8 @@
 <component name="load_feed_task" extends="Task">
     <interface>
         <field id="url" type="string" />
-        <field id="response" type="string" />
+        <field id="response" type="string" alwaysnotify="true" />
+        <field id="failed" type="string" alwaysnotify="true" />
     </interface>
     <script type="text/brightscript" uri="pkg:/components/tasks/load_feed_task.brs" />
 </component>

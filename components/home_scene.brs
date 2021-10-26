@@ -87,6 +87,7 @@ sub loadFeed(feed_url)
     content_server = appInfo.getValue("content_server")
     m.feed_task = CreateObject("roSGNode", "load_feed_task")
     m.feed_task.observeField("response", "onFeedResponse")
+    m.feed_task.observeField("failed", "onFeedFailed")
     m.feed_task.url = content_server + feed_url
     m.feed_task.control = "RUN"
 end sub
@@ -99,6 +100,11 @@ sub onFeedResponse(obj)
         m.content_screen.visible = true
         m.content_screen.feed_data = data
     else
-        ? "NO FEED DATA!"
+        showErrorDialog("Invalid feed data - check server connection", -1)
     end if
+end sub
+
+sub onFeedFailed(obj)
+    msg = obj.getData()
+    showErrorDialog(msg, -2)
 end sub
