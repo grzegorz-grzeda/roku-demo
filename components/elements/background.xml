@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component name="background" extends="Group">
+    <children>
+        <Rectangle id="Background" width="1920" height="1080" color="0x000000FF" />
+    </children>
+</component>
