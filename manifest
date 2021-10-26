@@ -8,4 +8,4 @@ splash_screen_hd=pkg:/images/splash_screen_fhd.png
 
 ui_resolutions=fhd
 
-content_server=http://localhost:3000/
+content_server=http://10.42.0.1:3000/

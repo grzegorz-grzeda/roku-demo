@@ -9,8 +9,15 @@ sub onCategorySelected(obj)
     loadFeed(item.feed_url)
 end sub
 
-sub loadFeed(url)
+sub loadFeed(feed_url)
     appInfo = CreateObject("roAppInfo")
     content_server = appInfo.getValue("content_server")
-    ? "loadFeed! ";content_server;url
+    m.feed_task = CreateObject("roSGNode", "load_feed_task")
+    m.feed_task.observeField("response", "onFeedResponse")
+    m.feed_task.url = content_server + feed_url
+    m.feed_task.control = "RUN"
+end sub
+
+sub onFeedResponse(obj)
+    ? "onFeedResponse "; obj.getData()
 end sub
